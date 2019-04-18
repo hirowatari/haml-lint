@@ -193,7 +193,7 @@ module HamlLint
   class Linter::MyFirstLinter < Linter
     include LinterRegistry
 
-    def visit_tag
+    def visit_tag(node)
       return unless node.tag_name == 'div'
       record_lint(node, "You're not allowed divs!")
     end
@@ -205,7 +205,13 @@ For more information on the different types on HAML node, please look through
 the HAML parser code: https://github.com/haml/haml/blob/master/lib/haml/parser.rb
 
 Keep in mind that by default your linter will be disabled by default. So you
-will need to enable it in your configuration file to have it run.
+will need to enable it in your configuration file to have it run. For example, in the above example add the following to the you your configuration file:
+
+```yaml
+linters:
+  MyFirstLinter:
+    enabled: true
+```    
 
 ## Disabling Linters within Source Code
 
